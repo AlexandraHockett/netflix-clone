@@ -2,8 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
-
-* {
-  font-family: "Open Sans", sans-serif;
+@layer utilities {
+  .first-custom-gradient {
+    background: radial-gradient(
+        140.76% 131.96% at 100% 100%,
+        rgb(109, 59, 227) 0%,
+        rgba(74, 42, 150, 0.5) 73.57%,
+        rgba(74, 42, 150, 0) 100%
+      ),
+      rgb(29, 82, 157);
+  }
+  .second-custom-gradient {
+    background: radial-gradient(
+        140.76% 131.96% at 100% 100%,
+        rgb(176, 56, 220) 0%,
+        rgba(74, 42, 150, 0.5) 73.57%,
+        rgba(74, 42, 150, 0) 100%
+      ),
+      rgb(29, 82, 157);
+  }
+  .third-custom-gradient {
+    background: radial-gradient(
+        140.76% 131.96% at 100% 100%,
+        rgb(229, 9, 20) 0%,
+        rgba(74, 42, 150, 0.5) 73.57%,
+        rgba(74, 42, 150, 0) 100%
+      ),
+      rgb(29, 82, 157);
+  }
 }
