@@ -10,12 +10,15 @@ app.get("/", (req, res) => {
 });
 
 app.get("/movies/list", (req, res) => {
-  return res.send(movies);
+  setTimeout(() => {
+    return res.send(movies);
+  }, 3000);
 });
 
 app.get("/movie/:id", (req, res) => {
   const id = req.params.id;
   const movie = movies.find((m) => m.id === id);
+
   return res.send(movie);
 });
 
