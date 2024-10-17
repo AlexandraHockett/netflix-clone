@@ -10,10 +10,6 @@ export default function Billboard() {
         autoPlay
         muted
         loop
-        style={{
-          objectFit: "cover",
-          transform: "scale(1.34)", // Aumenta o vídeo em 10% para cortar as bordas
-        }}
       ></video>
       <div className="absolute top-[40%] ml-16">
         <img
