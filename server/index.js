@@ -10,8 +10,12 @@ app.get("/", (req, res) => {
 });
 
 app.get("/movies/list", (req, res) => {
+  const offset = parseInt(req.query.offset);
+  const from = offset;
+  const to = from + 12;
+  const moviesSubset = [...movies].slice(from, to);
   setTimeout(() => {
-    return res.send(movies);
+    return res.json({ movies: moviesSubset, count: movies.length });
   }, 3000);
 });
 
