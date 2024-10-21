@@ -7,6 +7,7 @@ import {
   UseFormRegister,
   FieldErrors,
 } from "react-hook-form";
+import useAuth from "../hooks/useAuth";
 
 export type Inputs = {
   email: string;
@@ -37,15 +38,32 @@ export default function LoginPage() {
     getValues,
   } = useForm<Inputs>();
   const [variant, setVariant] = useState(Variant.LOGIN_IN);
-  console.log(errors);
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const { signup, login } = useAuth();
+  const onSubmit: SubmitHandler<Inputs> = async ({ password, email, name }) => {
+    if (variant === Variant.SIGN_UP) {
+      const response = await signup({
+        email,
+        password,
+        username: name,
+      });
+      console.log(response);
+    } else {
+      const response = await login({
+        email,
+        password,
+      });
+      console.log(response);
+    }
+  };
 
   return (
     <div className="relative bg-black h-screen w-screen bg-opacity-50">
       <NavBar />
       <div className="flex justify-center items-center h-full">
         <div className="bg-black bg-opacity-70 p-16 self-center mt-2 w-full max-w-md rounded-md">
-          <h2 className="text-white text-4xl mb-8 font-semibold">Sign in</h2>
+          <h2 className="text-white text-4xl mb-8 font-semibold">
+            {variant === Variant.SIGN_UP ? "Sign up" : "Log in"}
+          </h2>
           <AuthFormContext.Provider value={{ register, errors }}>
             <form
               className="flex flex-col gap-4"
@@ -119,3 +137,5 @@ export default function LoginPage() {
     </div>
   );
 }
+
+// pAssword123!
