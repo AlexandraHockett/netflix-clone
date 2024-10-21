@@ -8,7 +8,6 @@ router.post(
   "/signup",
   [
     check("email", "Please input a valid email").isEmail(),
-
     check(
       "password",
       "Please input a password with a min length of 6"
@@ -40,7 +39,6 @@ router.post(
         errors: [{ msg: "This user already exists" }],
       });
     }
-
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await prisma.user.create({
@@ -66,6 +64,10 @@ router.post(
     });
   }
 );
+
+// Validate that the user does exist
+// Validate the password
+// Return a JWT
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
