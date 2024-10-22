@@ -4,7 +4,7 @@ import MovieList from "../components/MovieList";
 import NavBar from "../components/NavBar";
 import useMoviesList from "../hooks/useMoviesList";
 import LoadingCards from "../components/LoadingCards";
-import { useSelector, UseSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "@reduxjs/toolkit/query";
 
 export default function BrowsePage() {
