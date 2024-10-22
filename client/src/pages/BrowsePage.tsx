@@ -5,7 +5,7 @@ import NavBar from "../components/NavBar";
 import useMoviesList from "../hooks/useMoviesList";
 import LoadingCards from "../components/LoadingCards";
 import { useSelector } from "react-redux";
-import { RootState } from "@reduxjs/toolkit/query";
+import { RootState } from "../app/store";
 
 export default function BrowsePage() {
   const [offset, setOffset] = useState(0);
