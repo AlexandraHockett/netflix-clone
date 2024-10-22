@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { RootState } from "../app/store";
+import { useSelector } from "react-redux";
+import useAuth from "../hooks/useAuth";
 
 const tabs = [
   "Home",
@@ -10,6 +13,10 @@ const tabs = [
 ];
 
 export default function NavBar() {
+  const { user, isLoading } = useSelector(
+    (state: RootState) => state.user.value
+  );
+  const { logout } = useAuth();
   const [showBackground, setShowBackground] = useState(false);
 
   useEffect(() => {
@@ -34,7 +41,7 @@ export default function NavBar() {
           src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
           alt="Netflix logo"
         />
-        <div className="flex gap-7 ml-8">
+        <div className="flex gap-7 ml-8 mr-auto">
           {tabs.map((tab) => (
             <div
               key={tab}
@@ -44,6 +51,13 @@ export default function NavBar() {
             </div>
           ))}
         </div>
+        {user && !isLoading && (
+          <div>
+            <div className="text-white hover:text-gray-300 cursor-pointer ml-auto">
+              <p onClick={logout}>Logout</p>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
