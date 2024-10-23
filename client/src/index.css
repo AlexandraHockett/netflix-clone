@@ -30,4 +30,10 @@
       ),
       rgb(29, 82, 157);
   }
+
+  .transparent-check-icon path {
+    fill: none; /* Makes the checkmark transparent */
+    stroke: white; /* Sets the stroke (outline) color to white */
+    stroke-width: 2px; /* Adjust the stroke width as needed */
+  }
 }
