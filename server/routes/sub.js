@@ -43,6 +43,22 @@ router.post("/session", async (req, res) => {
 });
 
 router.get("/subscription", checkAuth, async (req, res) => {
+  const response = await stripe.customers.search({
+    query: `email:'${req.user.email}'`,
+  });
+
+  if (response.data[0]) {
+    const customer = response.data[0];
+
+    const subscriptions = await stripe.subscriptions.list({
+      customer: customer.id,
+    });
+
+    return res.send(subscriptions.data[0]);
+  } else {
+    return res.send(null);
+  }
+
   res.json(req.user);
 });
 

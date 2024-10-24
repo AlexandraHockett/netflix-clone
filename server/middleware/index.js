@@ -23,12 +23,10 @@ module.exports = async (req, res, next) => {
 
   let payload;
   try {
-    console.log("Reached");
     payload = await JWT.verify(jwt, process.env.JSON_WEB_TOKEN_SECRET);
     req.user = payload;
     next();
   } catch (error) {
-    console.log(error);
     return res.status(403).json({
       errors: [
         {
