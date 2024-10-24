@@ -2,7 +2,6 @@ const JWT = require("jsonwebtoken");
 
 module.exports = async (req, res, next) => {
   const bearerToken = req.headers.authorization;
-  console.log(bearerToken);
   if (!bearerToken)
     return res.status(403).json({
       errors: [

@@ -99,7 +99,7 @@ router.post("/login", async (req, res) => {
   };
 
   const token = await JWT.sign(userPayload, process.env.JSON_WEB_TOKEN_SECRET, {
-    expiresIn: 3600000,
+    expiresIn: 3600000000000000,
   });
 
   return res.json({
