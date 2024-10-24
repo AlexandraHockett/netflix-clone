@@ -52,14 +52,17 @@ router.get("/subscription", checkAuth, async (req, res) => {
 
     const subscriptions = await stripe.subscriptions.list({
       customer: customer.id,
+      expand: ["data.plan.product"],
     });
 
-    return res.send(subscriptions.data[0]);
+    if (subscriptions.data[0]) {
+      return res.send(subscriptions.data[0].plan.product);
+    } else {
+      return res.send(null);
+    }
   } else {
     return res.send(null);
   }
-
-  res.json(req.user);
 });
 
 module.exports = router;

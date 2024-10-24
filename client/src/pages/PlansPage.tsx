@@ -1,10 +1,12 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import PlanCard from "../components/PlanCard";
 import usePlans from "../hooks/usePlans";
 import loadingGif from "../assets/loadTime.gif";
+import useSubscription from "../hooks/useSubscription";
+import { Navigate } from "react-router-dom";
 
 const createSession = async (email: string, priceId: string) => {
   const response = await axios.post("http://localhost:8080/sub/session", {
@@ -19,16 +21,28 @@ const createSession = async (email: string, priceId: string) => {
 
 export default function PlansPage() {
   const { loading, data } = usePlans();
+  const [
+    { data: subscription, loading: subscriptionLoading },
+    fetchSubscription,
+  ] = useSubscription();
   const [selectedSession, setSelectedSession] = useState<null | string>(null);
   const { user } = useSelector((state: RootState) => state.user.value);
-
-  if (loading) return <img src={loadingGif} alt="Loading" />;
-
   const handleClick = () => {
     if (user && selectedSession) {
       createSession(user.email, selectedSession);
     }
   };
+
+  useEffect(() => {
+    fetchSubscription();
+  }, []);
+
+  if (loading || subscriptionLoading)
+    return <img src={loadingGif} alt="Loading" />;
+
+  if (subscription) {
+    return <Navigate to="/plans/manage" />;
+  }
 
   return (
     <div className="flex items-center h-screen justify-center">
