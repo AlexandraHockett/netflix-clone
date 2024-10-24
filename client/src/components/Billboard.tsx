@@ -1,5 +1,6 @@
 import minionsVideo from "../assets/minions.mp4";
 import BillboardButton from "./BillboardButton";
+import minionsTitle from "../assets/minionsTitle.png";
 
 export default function Billboard() {
   return (
@@ -13,7 +14,7 @@ export default function Billboard() {
       ></video>
       <div className="absolute top-[40%] ml-16">
         <img
-          src="https://occ-0-3638-360.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABa_oqKBTh47MCaUjZYkxTzOpp4koWaLOW6296Xe38-oqBiQ3hFBpR243f-m1SmqYk2A_PAumky25bf5ZOMG4wAs7lw--jCk0mvQFTJGQpps.webp?r=0bb"
+          src={minionsTitle}
           alt="Imagem"
           style={{ width: "289px", height: "116px" }}
         />

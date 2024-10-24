@@ -1,6 +1,12 @@
 import { CheckIcon } from "@heroicons/react/24/outline";
 import { Plan } from "../hooks/usePlans";
 
+interface PlanProps {
+  setSelectedSession: React.Dispatch<React.SetStateAction<string | null>>;
+  selectedSession: string | null;
+  plan: Plan;
+}
+
 const formatter = new Intl.NumberFormat("en-UK", {
   style: "currency",
   currency: "GBP",
@@ -8,24 +14,23 @@ const formatter = new Intl.NumberFormat("en-UK", {
 
 export default function PlanCard({
   plan,
-  isSelected,
-  onSelect,
-}: {
-  plan: Plan;
-  isSelected: boolean;
-  onSelect: () => void;
-}) {
+  setSelectedSession,
+  selectedSession,
+}: PlanProps) {
   const { name, price, videoSoundQuality, ultraHd } = plan;
 
   return (
     <div
       className={`border rounded p-3 h-[350px] w-full mr-3 cursor-pointer relative transition-all duration-300 ${
-        isSelected ? "border-gray-300 shadow-lg" : "border-gray-300"
+        selectedSession === plan.price.id ? "border-gray-300 shadow-lg" : null
       }`}
-      onClick={onSelect}
+      onClick={() => setSelectedSession(plan.price.id)}
       style={{
         borderRadius: "18px",
-        boxShadow: isSelected ? "rgba(0, 0, 0, 0.25) 0px 4px 10px 0px" : "none",
+        boxShadow:
+          selectedSession === plan.price.id
+            ? "rgba(0, 0, 0, 0.25) 0px 4px 10px 0px"
+            : "none",
         transition:
           "margin 250ms ease-in-out, box-shadow 250ms ease-in-out, border-color 250ms ease-in-out",
       }}
@@ -39,15 +44,15 @@ export default function PlanCard({
         <h3 className="text-2xl">{name}</h3>
         <p className="font-light">{ultraHd ? "4K + HDR" : "1080p"}</p>
 
-        {/* Transparent Check Icon inside the header */}
-        {isSelected && (
+        {/* Check Icon inside the header */}
+        {selectedSession === plan.price.id && (
           <div className="absolute bottom-0 right-0 mb-2 mr-2">
             <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center">
               <CheckIcon
-                className="text-cyan-500" // Cyan outline for the checkmark
+                className="text-cyan-500"
                 width={15}
                 height={15}
-                strokeWidth={2} // Makes the icon stroke thicker
+                strokeWidth={2}
               />
             </div>
           </div>

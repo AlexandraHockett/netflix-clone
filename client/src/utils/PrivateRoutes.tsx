@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { RootState } from "../app/store";
 import { useSelector } from "react-redux";
-import loadingGif from "../assets/LoadTime.gif";
+import loadingGif from "../assets/loadTime.gif";
 
 const PrivateRoutes = () => {
   const { user, isLoading } = useSelector(
